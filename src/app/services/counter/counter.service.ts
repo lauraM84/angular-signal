@@ -5,6 +5,8 @@ import { computed, effect, Injectable, signal } from '@angular/core';
 })
 export class CounterService {
 
+  interval = -1;
+
   ciao = signal('hello');
 
   counter = signal(0);
@@ -42,6 +44,22 @@ export class CounterService {
   }
   removeOne() {
     this.counter.update(oldValue => oldValue - 1);
+  }
+
+  stopInterval() {
+    if (this.interval) {
+      window.clearInterval(this.interval)
+      this.interval = -1
+    }
+  }
+
+  startInterval() {
+    if (this.interval === -1) {
+      this.interval = window.setInterval(() => {
+        this.counter.update(oldValue => oldValue + 1);
+      }, 1000);
+    }
+
   }
 
 }

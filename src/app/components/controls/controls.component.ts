@@ -15,7 +15,15 @@ export class ControlsComponent {
   }
 
   minusClicked() {
-    this.counterServ.removeOne()
+    this.counterServ.removeOne();
+  }
+
+  play() {
+    this.counterServ.startInterval();
+  }
+
+  stop() {
+    this.counterServ.stopInterval();
   }
 
 }
